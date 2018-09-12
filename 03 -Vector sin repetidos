@@ -1,0 +1,86 @@
+//cargar un vector con datos random e imprimirlo por pantalla ordenados y reemplazar repetidos por cero
+#define CRT_SECURE_NO_WARNINGS
+#define MAX 10 //defino el maximo tamaño de mi vector
+#define SUP 9 //defino un maximo valor de numeros para mi random
+#define INF 1 // defino un minimo número para mi random
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+void cargar(int v[]); //declaro una función para cargar el vector
+void mostrar(int v[]); //declaro una función para mostrar el vector
+void ordenar(int v[], int n); //declaro una función para ordenar por metodo de burbujeo mi vector
+void repetidos(int v[]);
+int main()
+{
+	int v[MAX]; //declaro un vector llamado "v" que tiene MAX 10 de tamaño
+	srand((unsigned int)time(NULL)); //llamo a la función SRAND para variar mi semilla y variar el random
+	cargar(v); //llamo a mi función cargar de manera random mi vector
+	mostrar(v); //llamo a mi función para mostrar el vector sin ordenar
+	ordenar(v, MAX); //llamo a la función para ordenar mi vector con metodo de burbujeo
+	printf("\n");
+	mostrar(v); //llamo a mi función para mostrar el vector ordenado
+	printf("\n");
+	repetidos(v);
+	mostrar(v); //llamo a mi función para mostrar el vector ordenado y sin repetidos
+	printf("\n");
+	system("pause");
+	return 0;
+}
+
+void cargar(int v[])
+{
+	int i;
+	for (i = 0; i < MAX; i++)
+	{
+		v[i]= rand () % (SUP - INF + 1) + INF; //llamo a random para generar mis casos de manera aleatoria
+	}
+}
+
+void mostrar(int v[])
+{
+	int i; // declaro mi indice para el FOR
+	for (i = 0; i < MAX; i++)
+	{
+		printf("%d", v[i]); //imprimo por pantalla cada entero -%d- que contenga el V en su indice
+	}
+}
+
+void ordenar(int v[], int n)
+{
+	int i, j, aux, ordenado;
+		ordenado = 0; //inicializo mi variable con 0 para usarla de flag, mientras este en cero no esta ordenada y entra al while
+		i = 0; //inicializo mi contador en cero
+		while (!ordenado) //mientras no este ordenado
+		{
+			ordenado = 1; //Cambio el flag por si no es necesario ordenar más
+			for (j = 0; j < MAX - 1 - i; j++) //MAX - 1 se realiza por que no podes comparar vs el total sino versus el total de lugares - 1. Se le resta i ya que el último va quedando OK
+			{
+				if (v[j] > v[j + 1])
+				{
+					aux = v[j];
+					v[j] = v[j + 1];
+					v[j + 1] = aux;
+					ordenado = 0; //como hubo cambios, vuelve a ponerlo como desordenado
+
+				}
+			}
+			i++;
+		}
+}
+
+void repetidos(int v[])
+{
+	int i,j, comparador;
+	for (i = 0; i < MAX; i++)
+	{
+		for (j = i + 1; j < MAX; j++)
+		{
+			comparador = v[i];
+				if (comparador == v[j])
+				{
+					v[j] = 0;
+				}
+		}
+	}
+
+}
