@@ -1,0 +1,45 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define MAXF 5 //declaro mi maximo de filas
+#define MAXC 5 //declaro mi maximo de columnas
+#define SUP 9
+#define INF 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+void cargar(int v[MAXF][MAXC]);
+void mostrar(int v[MAXF][MAXC]);
+int main(void)
+{
+	int m[MAXF][MAXC];
+	srand((unsigned int)time(NULL));
+	cargar(m);
+	mostrar(m);
+	printf("\n");
+	system("pause");
+	return 0;
+}
+
+void cargar(int v[MAXF][MAXC])
+{
+	int f, c;
+	for (f = 0; f < MAXF; f++) //este for recorre cada fila
+	{
+		for (c = 0; c < MAXC; c++)// se declara este for dentro del otro para recorrer cada columna por fila
+		{
+			v[f][c] = rand() % (SUP - INF + 1) + INF;
+		}
+	}
+}
+
+void mostrar(int m[MAXF][MAXC])
+{
+	int i, j;
+	for (i = 0; i < MAXF; i++)
+	{
+		for (j = 0; j < MAXC; j++)
+		{
+			printf("%d", m[i][j]);
+		}
+		printf("\n");
+	}
+}
