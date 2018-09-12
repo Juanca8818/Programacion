@@ -1,0 +1,38 @@
+//cargar un vector con datos random e imprimirlo por pantalla
+#define CRT_SECURE_NO_WARNINGS
+#define MAX 10 //defino el maximo tamaño de mi vector
+#define SUP 9 //defino un maximo valor de numeros para mi random
+#define INF 1 // defino un minimo número para mi random
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+void cargar(int v[]); //declaro una función para cargar el vector
+void mostrar(int v[]); //declaro una función para mostrar el vector
+int main()
+{
+	int v[MAX]; //declaro un vector llamado "v" que tiene MAX 10 de tamaño
+	srand((unsigned int)time(NULL)); //llamo a la función SRAND para variar mi semilla y variar el random
+	cargar(v); //llamo a mi función cargar de manera random mi vector
+	mostrar(v); //llamo a mi función para mostrar el vector
+	system("pause");
+	return 0;
+}
+
+void cargar(int v[])
+{
+	int i;
+	for (i = 0; i < MAX; i++)
+	{
+		v[i]= rand () % (SUP - INF + 1) + INF; //llamo a random para generar mis casos de manera aleatoria
+	}
+}
+
+void mostrar(int v[])
+{
+	int i; // declaro mi indice para el FOR
+	for (i = 0; i < MAX; i++)
+	{
+		printf("%d", v[i]); //imprimo por pantalla cada entero -%d- que contenga el V en su indice
+		printf("\n");
+	}
+}
